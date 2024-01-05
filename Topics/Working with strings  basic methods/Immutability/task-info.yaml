@@ -1,0 +1,23 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: the "source" string
+  - text: the variable that contains the string
+  - text: "nothing, string methods return new values"
+  - text: the name of the variable
+files:
+  - name: main.py
+    visible: true
+    text: |+
+      #  You can experiment here, it won’t be checked
+    
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/6843#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Wed, 03 Jan 2024 08:52:09 UTC"
+record: -1
+selected_options:
+  - 2
+local_check: false

@@ -1,0 +1,24 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: '"london is the cxpitxl of grext britxin."'
+  - text: '"london is the cxpitxl of great britain."'
+  - text: '"London is the cxpitxl of grext britxin."'
+  - text: '"London is the cxpitxl of great britain."'
+  - text: '"LONDON IS THE CAPITAL OF GREAT BRITAIN."'
+files:
+  - name: main.py
+    visible: true
+    text: |+
+      #  You can experiment here, it won’t be checked
+    
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/6845#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Wed, 03 Jan 2024 08:53:02 UTC"
+record: -1
+selected_options:
+  - 1
+local_check: false

@@ -1,0 +1,30 @@
+type: code
+files:
+  - name: main.py
+    visible: true
+    highlight_level: NONE
+    text: |-
+      class Stack:
+      
+          def __init__(self):
+              pass
+      
+          def push(self, el):
+              pass
+      
+          def pop(self):
+              pass
+      
+          def peek(self):
+              pass
+      
+          def is_empty(self):
+              pass
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/8924#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Tue, 02 Jan 2024 12:19:28 UTC"
+record: -1
+submission_language: python3
