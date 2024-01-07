@@ -1,0 +1,19 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: " <code>Index(['1', '3', '5', '7', '9'], dtype='object', name='code')</code>"
+  - text: "  <code>RangeIndex(start=0, stop=5, step=1)</code>"
+  - text: " <code>Index(['skill_level'], dtype='object')</code>"
+  - text: " <code>Int64Index([1, 3, 5, 7, 9], dtype='int64', name='skill_level')</code>"
+  - text: " <code>Index([1, 3, 5, 7, 9], dtype='int64', name='code') </code>"
+files:
+  - name: main.py
+    visible: true
+    text: |+
+      #  You can experiment here, it won’t be checked
+    
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/13002#comment
+status: Solved
+record: -1
+local_check: false

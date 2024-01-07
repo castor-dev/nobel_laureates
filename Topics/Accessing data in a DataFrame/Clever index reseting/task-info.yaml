@@ -1,0 +1,18 @@
+type: code
+files:
+  - name: main.py
+    visible: true
+    highlight_level: NONE
+    text: |-
+      # your code here, the dataset is already loaded. The variable name is df_rock.
+      ...
+      
+      print(df_rock.index)
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/13005#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Sun, 07 Jan 2024 13:12:19 UTC"
+record: -1
+submission_language: python3

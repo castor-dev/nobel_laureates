@@ -3,3 +3,5 @@ content:
   - Working with strings  basic methods
   - Splitting strings and joining lists
   - Sep and end arguments of print
+  - DataFrame
+  - Accessing data in a DataFrame

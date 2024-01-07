@@ -1,0 +1,34 @@
+<h2>Force grades</h2>
+<div class="step-text">
+<p></p>
+<p>We have a <code class="java">DataFrame</code> containing the U.S. Air Force Skill Groups:</p>
+<pre><code class="java">afcs = pd.DataFrame({'code': [1, 3, 5, 7, 9],
+                     'skill_level': ['helper', 'apprentice', 'journeyman', 'craftsman', 'superintendent']})
+afcs.head()</code></pre>
+<pre><code class="language-no-highlight">+----+--------+----------------+
+|    |   code | skill_level    |
+|----+--------+----------------|
+|  0 |      1 | helper         |
+|  1 |      3 | apprentice     |
+|  2 |      5 | journeyman     |
+|  3 |      7 | craftsman      |
+|  4 |      9 | superintendent |
++----+--------+----------------+</code></pre>
+<p>We set the <code class="java">code</code> column as index:</p>
+<pre><code class="java">afcs.set_index('code', inplace=True)
+afcs.head()</code></pre>
+<p>Output:</p>
+<pre><code class="language-no-highlight">+--------+----------------+
+|        | skill_level    |
+|--------+----------------|
+|   code |                |
+|--------+----------------|
+|      1 | helper         |
+|      3 | apprentice     |
+|      5 | journeyman     |
+|      7 | craftsman      |
+|      9 | superintendent |
++--------+----------------+</code></pre>
+<p>What will the output of <code class="java">afcs.index</code> be?</p>
+<p></p><div class="alert alert-warning">Note that this task assumes the usage of <code class="java">pandas≥2.0.0</code></div>
+</div>

@@ -1,0 +1,23 @@
+type: choice
+is_multiple_choice: false
+options:
+  - text: "0, 1, 2, 3"
+  - text: There is no index in this DataFrame
+  - text: "1877, 1815, 1860, 1847"
+  - text: "1, 2, 3, 4"
+files:
+  - name: main.py
+    visible: true
+    text: |+
+      #  You can experiment here, it won’t be checked
+    
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/10936#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Sun, 07 Jan 2024 12:35:32 UTC"
+record: -1
+selected_options:
+  - 2
+local_check: false
