@@ -150,6 +150,9 @@ files:
       
       if __name__ == '__main__':    LoadTest().run_tests()
     learner_created: false
-feedback_link: https://hyperskill.org/projects/302/stages/1698/implement#comment
-status: Unchecked
-record: -1
+feedback_link: https://hyperskill.org/learn/step/23838#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Wed, 17 Jan 2024 12:11:55 UTC"
+record: 1

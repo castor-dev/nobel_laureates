@@ -8,10 +8,10 @@ captions:
   - "print(*[&#x27;I&#x27;, &#x27;am&#x27;, &#x27;the&#x27;, &#x27;test&#x27;], end=&#x27;!&#x27;)"
 options:
   - '&#x27;I am the test&#x27;'
-  - '&#x27;I_ _am_ _the_test&#x27;'
-  - '&#x27;I am the test!&#x27;'
   - '&#x27;Iamthetest&#x27;'
   - '&#x27;I am the!test&#x27;'
+  - '&#x27;I_ _am_ _the_test&#x27;'
+  - '&#x27;I am the test!&#x27;'
 files:
   - name: main.py
     visible: true

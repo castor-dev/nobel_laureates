@@ -1,3 +1,3 @@
-from test.tests import LoadTest
+from test.tests import BirthplaceTest
 
-if __name__ == '__main__':    LoadTest().run_tests()
+if __name__ == '__main__':    BirthplaceTest().run_tests()

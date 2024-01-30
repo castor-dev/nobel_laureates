@@ -4,11 +4,11 @@ hyperskill_project:
   is_template_based: false
   use_ide: true
   environment: unittest
-update_date: "Sun, 07 Jan 2024 12:32:43 UTC"
+update_date: "Tue, 30 Jan 2024 10:29:31 UTC"
 stages:
   - id: 1698
     step: 23838
-    is_completed: false
+    is_completed: true
   - id: 1699
     step: 23839
     is_completed: false
@@ -121,14 +121,14 @@ topics:
       theory_id: 8220
     - title: Basics of functions
       theory_id: 8857
+    - title: Probability and Statistics
+      theory_id: 11637
     - title: Sample space
       theory_id: 7309
     - title: Events
       theory_id: 7892
     - title: Formal definition of probability
       theory_id: 10538
-    - title: Probability and Statistics
-      theory_id: 11637
     - title: Population and sample
       theory_id: 11274
     - title: "Mean, median, and mode"

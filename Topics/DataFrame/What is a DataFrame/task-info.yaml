@@ -1,11 +1,11 @@
 type: choice
 is_multiple_choice: true
 options:
-  - text: All columns in a DataFrame must be of the same data type.
-  - text: Rows of a DataFrame are labeled.
   - text: Each column of a DataFrame is a Series.
   - text: You can easily load data into a DataFrame from various data formats.
   - text: DataFrame represents tabular data.
+  - text: All columns in a DataFrame must be of the same data type.
+  - text: Rows of a DataFrame are labeled.
 files:
   - name: main.py
     visible: true

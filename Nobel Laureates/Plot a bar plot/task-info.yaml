@@ -114,6 +114,6 @@ files:
       
       if __name__ == '__main__':    Bar().run_tests()
     learner_created: false
-feedback_link: https://hyperskill.org/projects/302/stages/1702/implement#comment
+feedback_link: https://hyperskill.org/learn/step/23842#comment
 status: Unchecked
 record: -1

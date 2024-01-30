@@ -87,6 +87,6 @@ files:
       
       if __name__ == '__main__':    Box().run_tests()
     learner_created: false
-feedback_link: https://hyperskill.org/projects/302/stages/1703/implement#comment
+feedback_link: https://hyperskill.org/learn/step/23843#comment
 status: Unchecked
 record: -1

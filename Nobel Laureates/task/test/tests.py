@@ -1,38 +1,13 @@
 import ast
-from hstest import *
 from hstest.stage_test import List
+from hstest import *
 
-answer_dup = False
-answer_index = {
-    'country': {
-        0: 'Argentina',
-        1: '',
-        2: '',
-        3: 'Belgium',
-        4: 'Belgium',
-        5: 'Belgium',
-        6: 'Belgium',
-        7: 'Belgium',
-        8: 'Belgium',
-        9: 'Belgium',
-        10: 'Belgium',
-        11: 'Belgium',
-        12: 'Belgium',
-        13: '',
-        14: '',
-        15: '', 16: 'Denmark', 17: 'Denmark', 18: 'Denmark', 19: 'Denmark'},
-    'name': {0: 'César Milstein', 1: 'Ivo Andric *', 2: 'Vladimir Prelog *', 3: 'Auguste Beernaert',
-             4: 'Maurice Maeterlinck', 5: 'Henri La Fontaine', 6: 'Jules Bordet', 7: 'Corneille Heymans',
-             8: 'Georges Pire', 9: 'Albert Claude', 10: 'Christian de Duve', 11: 'Ilya Prigogine',
-             12: 'François Englert', 13: 'Simon Kuznets *', 14: 'Menachem Begin *', 15: 'Shimon Peres *',
-             16: 'Karl Adolph Gjellerup', 17: 'August Krogh', 18: 'Niels Bohr',
-             19: 'Johannes Andreas Grib Fibiger'}}
+answer = ['Argentina', 'Bosnia and Herzegovina', 'Bosnia and Herzegovina', 'Belgium', 'Belgium', 'Belgium', 'Belgium', 'Belgium', 'Belgium', 'UK', 'Russia', 'Belgium', 'Belarus', 'Belarus', 'Belarus', 'Denmark', 'Denmark', 'Denmark', 'USA', 'Denmark', 'Denmark', 'Czech Republic', 'Czech Republic', 'Czech Republic', 'Austria', 'Hungary', 'Cyprus', 'France', 'France', 'France', 'France', 'France', 'Algeria', 'France', 'France', 'France', 'France', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Greece', 'Ghana', 'Germany', 'Germany', 'Germany', 'Germany', 'Austria', 'Germany', 'Germany', 'Germany', 'Germany', 'Latvia', 'Germany', 'Germany', 'Italy', 'Italy', 'Italy', 'Italy', 'Italy', 'Italy', 'Italy', 'Ukraine', 'Russia', 'Mandatory Palestine', 'Israel', 'Hungary', 'Mandatory Palestine', 'Germany', 'Russia', 'Myanmar', 'Mexico', 'Mexico', 'Mexico', 'Luxembourg', 'Luxembourg', 'Lithuania', 'Lithuania', 'Lithuania', 'Liberia', 'Latvia', 'Ottoman Empire', 'Korea', 'Kenya', 'Spain', 'Spain', 'Spain', 'Spain', 'Spain', 'South Africa', 'Africa', 'South Africa', 'Lithuania', 'South Africa', 'South Africa', 'South Africa', 'South Africa', 'South Africa', 'South Africa', 'South Africa', 'Bulgaria', 'UK', 'Lithuania', 'UK', 'UK', 'Argentina', 'UK', 'UK', 'UK', 'UK', 'Poland', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'Germany', 'USA', 'Austria', 'South Africa', 'Israel', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'Hungary', 'Hungary', 'USA', 'USA', 'USA', 'USA', 'USA', 'Mexico', 'USA', 'Lithuania', 'USA', 'USA', 'USA', 'USA', 'Canada', 'USA', 'Netherlands', 'USA', 'Ukraine', 'USA', 'USA', 'USA', 'Pakistan', 'USA', 'USA', 'Germany', 'Pakistan', 'USA', 'USA', 'Norway', 'Italy', 'USA', 'Germany', 'USA', 'USA', 'USA', 'USA', 'Bosnia and Herzegovina', 'Vietnam', 'Venezuela', 'Poland', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'UK', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'Poland', 'USA', 'USA', 'Ukraine', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'Austria', 'USA', 'USA', 'Canada', 'USA', 'USA', 'USA', 'USA', 'USA', 'Ukraine', 'Switzerland', 'USA', 'Germany', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'Germany', 'USA', 'USA', 'USA', 'China', 'USA', 'UK', 'China', 'China', 'USA', 'USA', 'USA', 'Spain', 'USA', 'Italy', 'USA', 'USA', 'USA', 'Hungary', 'USA', 'USA', 'USA', 'USA', 'USA', 'Hungary', 'Germany', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'Norway', 'Germany', 'Romania', 'USA', 'USA', 'USA', 'USA', 'Netherlands', 'USA', 'USA', 'USA', 'USA', 'Canada', 'USA', 'USA', 'USA', 'Poland', 'France', 'USA', 'USA', 'USA', 'Germany', 'USA', 'Poland', 'USA', 'South Africa', 'USA', 'USA', 'USA', 'UK', 'USA', 'Venezuela', 'USA', 'Canada', 'USA', 'USA', 'USA', 'USA', 'Italy', 'USA', 'Romania', 'USA', 'Taiwan', 'USA', 'Russia', 'USA', 'Korea', 'USA', 'USA', 'USA', 'USA', 'Germany', 'USA', 'Canada', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'China', 'USA', 'Canada', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'Canada', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'Canada', 'USA', 'USA', 'USA', 'USA', 'USA', 'China', 'USA', 'Egypt', 'Austria', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'South Africa', 'Italy', 'USA', 'USA', 'USA', 'USA', 'Israel', 'Russia', 'USA', 'UK', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'Germany', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'UK', 'Italy', 'USA', 'USA', 'USA', 'Russia', 'Japan', 'Japan', 'USA', 'USA', 'USA', 'UK', 'USA', 'Australia', 'USA', 'China', 'Canada', 'USA', 'India', 'USA', 'USA', 'USA', 'China', 'USA', 'USA', 'USA', 'Canada', 'USA', 'USA', 'USA', 'USA', 'Japan', 'USA', 'India', 'UK', 'UK', 'UK', 'New Zealand', 'Australia', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'Germany', 'UK', 'Germany', 'UK', 'UK', 'UK', 'UK', 'Brazil', 'New Zealand', 'UK', 'Austria', 'UK', 'UK', 'UK', 'Egypt', 'UK', 'UK', 'Germany', 'Hungary', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'Austria', 'UK', 'Australia', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'Trinidad and Tobago', 'UK', 'UK', 'UK', 'South Africa', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'Iran', 'Russia', 'UK', 'UK', 'South Africa', 'Ukraine', 'Ukraine', 'Ukraine', 'Ukraine', 'Ukraine', 'Trinidad and Tobago', 'Taiwan', 'Switzerland', 'Switzerland', 'Switzerland', 'France', 'Switzerland', 'Switzerland', 'Germany', 'Russia', 'Croatia', 'Germany', 'Switzerland', 'Switzerland', 'Poland', 'Switzerland', 'Switzerland', 'Bosnia and Herzegovina', 'Switzerland', 'Switzerland', 'China', 'Switzerland', 'Switzerland', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Germany', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Germany', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Spain', 'Spain', 'Slovenia', 'Serbia', 'Saint Lucia', 'Russia', 'Ukraine', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Australia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Romania', 'Romania', 'Romania', 'Romania', 'Portugal', 'Portugal', 'Portugal', 'Portugal', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Russia', 'Peru', 'Egypt', 'British Raj', 'Pakistan', 'Norway', 'Norway', 'Norway', 'Denmark', 'Norway', 'Norway', 'Norway', 'Norway', 'Norway', 'Norway', 'Norway', 'Nigeria', 'New Zealand', 'New Zealand', 'New Zealand', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'China', 'Japan', 'Japan', 'Italy', 'Italy', 'Italy', 'Italy', 'Italy', 'Italy', 'Switzerland', 'Italy', 'Sicily', 'Italy', 'Italy', 'Israel', 'Israel', 'Israel', 'Ireland', 'Ireland', 'Ireland', 'Ireland', 'France', 'UK', 'Ireland', 'Ireland', 'UK', 'Iran', 'India', 'India', 'India', 'Ottoman Empire', 'India', 'India', 'India', 'India', 'Iceland', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'China', 'Guatemala', 'Guatemala', 'Ottoman Empire', 'Germany', 'Germany', 'Poland', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Austria', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Austria', 'Germany', 'Germany', 'Poland', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Romania', 'Germany', 'Romania', 'France', 'France', 'Switzerland', 'Poland', 'France', 'France', 'France', 'France', 'France', 'Luxembourg', 'Poland', 'France', 'France', 'France', 'France', 'France', 'France', 'France', 'France', 'France', 'France', 'France', 'Russia', 'France', 'France', 'France', 'France', 'France', 'Madagascar', 'France', 'France', 'Ukraine', 'French Algeria', 'China', 'France', 'France', 'France', 'France', 'Morocco', 'France', 'Finland', 'Finland', 'Russia', 'Faroe Islands', 'Egypt', 'Egypt', 'Egypt', 'Egypt', 'East Timor', 'East Timor', 'Faroe Islands', 'Denmark', 'Croatia', 'Costa Rica', 'Colombia', 'China', 'China', 'Tibet', 'China', 'China', 'China', 'China', 'China', 'Chile', 'Chile', 'New Zealand', 'Canada', 'Canada', 'Canada', 'Germany', 'Canada', 'Canada', 'Canada', 'Germany', 'Canada', 'Canada', 'Canada', 'UK', 'Canada', 'Canada', 'Canada', 'Canada', 'UK', 'Canada', 'Canada', 'Canada', 'Bulgaria', 'Brazil', 'Belarus', 'India', 'Austria', 'Slovenia', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Australia', 'Australia', 'Australia', 'Australia', 'Australia', 'UK', 'Australia', 'Hungary', 'Australia', 'Australia', 'Australia', 'USA', 'Argentina', 'Argentina', 'France']
 
-
-class LoadTest(StageTest):
+class BirthplaceTest(StageTest):
 
     def generate(self) -> List[TestCase]:
-        return [TestCase(time_limit=1000000)]
+        return [TestCase(time_limit=15000)]
 
     def check(self, reply: str, attach):
 
@@ -41,72 +16,37 @@ class LoadTest(StageTest):
         if len(reply) == 0:
             return CheckResult.wrong("No output was printed")
 
-        if reply.count('{') < 1 or reply.count('}') < 1:
-            return CheckResult.wrong('Your answer should contain Python dictionary')
+        if reply.count('[') < 1 or reply.count(']') < 1:
+            return CheckResult.wrong('Print the answer as a list')
 
-        if len(reply.split('\n')) != 2:
-            return CheckResult.wrong('The number of answers supplied does not equal two.\n'
-                                     'Please follow the output format from the stage description.')
-
-        reply_dup = reply.split('\n')[0]
-        reply_index = reply.split('\n')[1]
-        index_from = reply_index.find('{')
-        index_to = reply_index.rfind('}')
-        dict_index = reply_index[index_from: index_to + 1]
+        index_reply_from = reply.find('[')
+        index_reply_to = reply.find(']')
+        list_country = reply[index_reply_from: index_reply_to + 1]
 
         try:
-            reply_dup = ast.literal_eval(reply_dup)
-            user_dict = ast.literal_eval(dict_index)
+            user_list = ast.literal_eval(list_country)
         except Exception as e:
-            return CheckResult.wrong(f"Couldn't parse dictionary from your answer.\n"
+            return CheckResult.wrong(f"Seems that output is in wrong format.\n"
                                      f"Make sure you use only the following Python structures in the output: string, "
-                                     f"int, float, bool, list, dictionary.")
+                                     f"int, float, list, dictionary")
 
-        if not isinstance(reply_dup, bool):
-            return CheckResult.wrong('Print the result of objective # 3 as a string')
+        if not isinstance(user_list, list):
+            return CheckResult.wrong(f'Print your answer as a Python list')
 
-        if reply_dup != answer_dup:
-            return CheckResult.wrong(f"Result of objective # 3 is not correct")
+        if len(user_list) != len(answer):
+            return CheckResult.wrong(f'List from the answer should contain {len(answer)} values, found {len(user_list)}')
 
-        if not isinstance(user_dict, dict):
-            return CheckResult.wrong('Print the second part of the answer as a Python dictionary')
-
-        if len(answer_index.keys()) != len(user_dict.keys()):
-            return CheckResult.wrong(
-                f'Output should contain {len(answer_index.keys())} dict elements, found {len(user_dict.keys())}')
-
-        for key in answer_index.keys():
-            if key not in user_dict.keys():
-                return CheckResult.wrong(f'Output dictionary should contain {key} as a key.')
-            if not isinstance(user_dict[key], dict):
-                return CheckResult.wrong(f'Value for {key} key in output dictionary should be also '
-                                         f'a dictionary, found {type(user_dict[key])}.')
-
-        for key in answer_index.keys():
-            if len(answer_index[key].keys()) != len(user_dict[key].keys()):
-                return CheckResult.wrong(
-                    f'Output in column {key} should contain {len(answer_index[key].keys())} dict elements, '
-                    f'found {len(user_dict[key].keys())}')
-
-        for key in answer_index.keys():
-            for key_inner in answer_index[key].keys():
-                if key not in user_dict.keys():
-                    return CheckResult.wrong(f'Output in column {key} should contain {key_inner} as a key')
-
-        for key in user_dict.keys():
-            curr_user_dict = user_dict[key]
-            curr_answer_dict = answer_index[key]
-            for key_curr in curr_user_dict.keys():
-                if key_curr not in curr_answer_dict.keys():
-                    return CheckResult.wrong(f'Output should not contain {key_curr} as key for {key} column')
-                curr_user_val = curr_user_dict[key_curr]
-                curr_answer_val = curr_answer_dict[key_curr]
-                if curr_user_val != curr_answer_val:
-                    return CheckResult.wrong(
-                        f'Wrong value of column containing {key} at index {key_curr} ')
+        if set(user_list) != set(answer):
+            for value in answer:
+                if value not in user_list:
+                    return CheckResult.wrong(f"Seems like your answer is not correct: there is no {value} in the output list")
+            if len(set(user_list) - set(answer)) > 0:
+                return CheckResult.wrong(f"Seems like your answer is not correct.\n"
+                                         f"The following values are excessive: {list(set(user_list) - set(answer))}.")
+            return CheckResult.wrong("Seems like your answer is not correct")
 
         return CheckResult.correct()
 
 
 if __name__ == '__main__':
-    LoadTest().run_tests()
+    BirthplaceTest().run_tests()

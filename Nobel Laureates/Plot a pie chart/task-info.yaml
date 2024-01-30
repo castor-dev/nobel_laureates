@@ -110,6 +110,6 @@ files:
       
       if __name__ == '__main__':    Pie().run_tests()
     learner_created: false
-feedback_link: https://hyperskill.org/projects/302/stages/1701/implement#comment
+feedback_link: https://hyperskill.org/learn/step/23841#comment
 status: Unchecked
 record: -1

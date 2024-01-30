@@ -90,6 +90,6 @@ files:
       
       if __name__ == '__main__':    BirthplaceTest().run_tests()
     learner_created: false
-feedback_link: https://hyperskill.org/projects/302/stages/1699/implement#comment
-status: Unchecked
-record: -1
+feedback_link: https://hyperskill.org/learn/step/23839#comment
+status: Failed
+record: 2

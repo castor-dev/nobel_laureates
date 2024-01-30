@@ -1,10 +1,10 @@
 type: choice
 is_multiple_choice: false
 options:
-  - text: It separates strings by a line break character.
-  - text: It adds a delimiter between iterable objects.
-  - text: It adds given characters to the end of line.
   - text: It adds a delimiter between non-iterable objects.
+  - text: It adds given characters to the end of line.
+  - text: It adds a delimiter between iterable objects.
+  - text: It separates strings by a line break character.
 files:
   - name: main.py
     visible: true
