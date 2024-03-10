@@ -4,17 +4,17 @@ hyperskill_project:
   is_template_based: false
   use_ide: true
   environment: unittest
-update_date: "Tue, 30 Jan 2024 10:29:31 UTC"
+update_date: "Sun, 10 Mar 2024 11:34:30 UTC"
 stages:
   - id: 1698
     step: 23838
     is_completed: true
   - id: 1699
     step: 23839
-    is_completed: false
+    is_completed: true
   - id: 1700
     step: 23840
-    is_completed: false
+    is_completed: true
   - id: 1701
     step: 23841
     is_completed: false
@@ -68,8 +68,6 @@ topics:
       theory_id: 19153
     - title: JSON
       theory_id: 6854
-    - title: Sep and end arguments of print
-      theory_id: 7452
     - title: Introduction to pandas
       theory_id: 10416
     - title: Series
@@ -108,6 +106,8 @@ topics:
       theory_id: 6481
     - title: Type casting
       theory_id: 6224
+    - title: Sep and end arguments of print
+      theory_id: 7452
   1:
     - title: What is math?
       theory_id: 28537

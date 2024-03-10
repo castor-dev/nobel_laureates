@@ -91,5 +91,8 @@ files:
       if __name__ == '__main__':    BirthplaceTest().run_tests()
     learner_created: false
 feedback_link: https://hyperskill.org/learn/step/23839#comment
-status: Failed
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Sun, 10 Mar 2024 11:45:45 UTC"
 record: 2

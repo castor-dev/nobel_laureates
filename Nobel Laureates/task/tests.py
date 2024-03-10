@@ -1,3 +1,3 @@
-from test.tests import BirthplaceTest
+from test.tests import Pie
 
-if __name__ == '__main__':    BirthplaceTest().run_tests()
+if __name__ == '__main__':    Pie().run_tests()

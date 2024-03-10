@@ -1,52 +1,72 @@
-import ast
-from hstest.stage_test import List
-from hstest import *
+from inspect import isfunction
 
-answer = ['Argentina', 'Bosnia and Herzegovina', 'Bosnia and Herzegovina', 'Belgium', 'Belgium', 'Belgium', 'Belgium', 'Belgium', 'Belgium', 'UK', 'Russia', 'Belgium', 'Belarus', 'Belarus', 'Belarus', 'Denmark', 'Denmark', 'Denmark', 'USA', 'Denmark', 'Denmark', 'Czech Republic', 'Czech Republic', 'Czech Republic', 'Austria', 'Hungary', 'Cyprus', 'France', 'France', 'France', 'France', 'France', 'Algeria', 'France', 'France', 'France', 'France', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Greece', 'Ghana', 'Germany', 'Germany', 'Germany', 'Germany', 'Austria', 'Germany', 'Germany', 'Germany', 'Germany', 'Latvia', 'Germany', 'Germany', 'Italy', 'Italy', 'Italy', 'Italy', 'Italy', 'Italy', 'Italy', 'Ukraine', 'Russia', 'Mandatory Palestine', 'Israel', 'Hungary', 'Mandatory Palestine', 'Germany', 'Russia', 'Myanmar', 'Mexico', 'Mexico', 'Mexico', 'Luxembourg', 'Luxembourg', 'Lithuania', 'Lithuania', 'Lithuania', 'Liberia', 'Latvia', 'Ottoman Empire', 'Korea', 'Kenya', 'Spain', 'Spain', 'Spain', 'Spain', 'Spain', 'South Africa', 'Africa', 'South Africa', 'Lithuania', 'South Africa', 'South Africa', 'South Africa', 'South Africa', 'South Africa', 'South Africa', 'South Africa', 'Bulgaria', 'UK', 'Lithuania', 'UK', 'UK', 'Argentina', 'UK', 'UK', 'UK', 'UK', 'Poland', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'Germany', 'USA', 'Austria', 'South Africa', 'Israel', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'Hungary', 'Hungary', 'USA', 'USA', 'USA', 'USA', 'USA', 'Mexico', 'USA', 'Lithuania', 'USA', 'USA', 'USA', 'USA', 'Canada', 'USA', 'Netherlands', 'USA', 'Ukraine', 'USA', 'USA', 'USA', 'Pakistan', 'USA', 'USA', 'Germany', 'Pakistan', 'USA', 'USA', 'Norway', 'Italy', 'USA', 'Germany', 'USA', 'USA', 'USA', 'USA', 'Bosnia and Herzegovina', 'Vietnam', 'Venezuela', 'Poland', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'UK', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'Poland', 'USA', 'USA', 'Ukraine', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'Austria', 'USA', 'USA', 'Canada', 'USA', 'USA', 'USA', 'USA', 'USA', 'Ukraine', 'Switzerland', 'USA', 'Germany', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'Germany', 'USA', 'USA', 'USA', 'China', 'USA', 'UK', 'China', 'China', 'USA', 'USA', 'USA', 'Spain', 'USA', 'Italy', 'USA', 'USA', 'USA', 'Hungary', 'USA', 'USA', 'USA', 'USA', 'USA', 'Hungary', 'Germany', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'Norway', 'Germany', 'Romania', 'USA', 'USA', 'USA', 'USA', 'Netherlands', 'USA', 'USA', 'USA', 'USA', 'Canada', 'USA', 'USA', 'USA', 'Poland', 'France', 'USA', 'USA', 'USA', 'Germany', 'USA', 'Poland', 'USA', 'South Africa', 'USA', 'USA', 'USA', 'UK', 'USA', 'Venezuela', 'USA', 'Canada', 'USA', 'USA', 'USA', 'USA', 'Italy', 'USA', 'Romania', 'USA', 'Taiwan', 'USA', 'Russia', 'USA', 'Korea', 'USA', 'USA', 'USA', 'USA', 'Germany', 'USA', 'Canada', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'China', 'USA', 'Canada', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'Canada', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'Canada', 'USA', 'USA', 'USA', 'USA', 'USA', 'China', 'USA', 'Egypt', 'Austria', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'South Africa', 'Italy', 'USA', 'USA', 'USA', 'USA', 'Israel', 'Russia', 'USA', 'UK', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'Germany', 'USA', 'USA', 'USA', 'USA', 'USA', 'USA', 'UK', 'Italy', 'USA', 'USA', 'USA', 'Russia', 'Japan', 'Japan', 'USA', 'USA', 'USA', 'UK', 'USA', 'Australia', 'USA', 'China', 'Canada', 'USA', 'India', 'USA', 'USA', 'USA', 'China', 'USA', 'USA', 'USA', 'Canada', 'USA', 'USA', 'USA', 'USA', 'Japan', 'USA', 'India', 'UK', 'UK', 'UK', 'New Zealand', 'Australia', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'Germany', 'UK', 'Germany', 'UK', 'UK', 'UK', 'UK', 'Brazil', 'New Zealand', 'UK', 'Austria', 'UK', 'UK', 'UK', 'Egypt', 'UK', 'UK', 'Germany', 'Hungary', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'Austria', 'UK', 'Australia', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'Trinidad and Tobago', 'UK', 'UK', 'UK', 'South Africa', 'UK', 'UK', 'UK', 'UK', 'UK', 'UK', 'Iran', 'Russia', 'UK', 'UK', 'South Africa', 'Ukraine', 'Ukraine', 'Ukraine', 'Ukraine', 'Ukraine', 'Trinidad and Tobago', 'Taiwan', 'Switzerland', 'Switzerland', 'Switzerland', 'France', 'Switzerland', 'Switzerland', 'Germany', 'Russia', 'Croatia', 'Germany', 'Switzerland', 'Switzerland', 'Poland', 'Switzerland', 'Switzerland', 'Bosnia and Herzegovina', 'Switzerland', 'Switzerland', 'China', 'Switzerland', 'Switzerland', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Germany', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Germany', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Spain', 'Spain', 'Slovenia', 'Serbia', 'Saint Lucia', 'Russia', 'Ukraine', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Australia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Romania', 'Romania', 'Romania', 'Romania', 'Portugal', 'Portugal', 'Portugal', 'Portugal', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Russia', 'Peru', 'Egypt', 'British Raj', 'Pakistan', 'Norway', 'Norway', 'Norway', 'Denmark', 'Norway', 'Norway', 'Norway', 'Norway', 'Norway', 'Norway', 'Norway', 'Nigeria', 'New Zealand', 'New Zealand', 'New Zealand', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'China', 'Japan', 'Japan', 'Italy', 'Italy', 'Italy', 'Italy', 'Italy', 'Italy', 'Switzerland', 'Italy', 'Sicily', 'Italy', 'Italy', 'Israel', 'Israel', 'Israel', 'Ireland', 'Ireland', 'Ireland', 'Ireland', 'France', 'UK', 'Ireland', 'Ireland', 'UK', 'Iran', 'India', 'India', 'India', 'Ottoman Empire', 'India', 'India', 'India', 'India', 'Iceland', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'China', 'Guatemala', 'Guatemala', 'Ottoman Empire', 'Germany', 'Germany', 'Poland', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Austria', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Austria', 'Germany', 'Germany', 'Poland', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Romania', 'Germany', 'Romania', 'France', 'France', 'Switzerland', 'Poland', 'France', 'France', 'France', 'France', 'France', 'Luxembourg', 'Poland', 'France', 'France', 'France', 'France', 'France', 'France', 'France', 'France', 'France', 'France', 'France', 'Russia', 'France', 'France', 'France', 'France', 'France', 'Madagascar', 'France', 'France', 'Ukraine', 'French Algeria', 'China', 'France', 'France', 'France', 'France', 'Morocco', 'France', 'Finland', 'Finland', 'Russia', 'Faroe Islands', 'Egypt', 'Egypt', 'Egypt', 'Egypt', 'East Timor', 'East Timor', 'Faroe Islands', 'Denmark', 'Croatia', 'Costa Rica', 'Colombia', 'China', 'China', 'Tibet', 'China', 'China', 'China', 'China', 'China', 'Chile', 'Chile', 'New Zealand', 'Canada', 'Canada', 'Canada', 'Germany', 'Canada', 'Canada', 'Canada', 'Germany', 'Canada', 'Canada', 'Canada', 'UK', 'Canada', 'Canada', 'Canada', 'Canada', 'UK', 'Canada', 'Canada', 'Canada', 'Bulgaria', 'Brazil', 'Belarus', 'India', 'Austria', 'Slovenia', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Australia', 'Australia', 'Australia', 'Australia', 'Australia', 'UK', 'Australia', 'Hungary', 'Australia', 'Australia', 'Australia', 'USA', 'Argentina', 'Argentina', 'France']
+from hstest import PlottingTest, WrongAnswer, dynamic_test, TestedProgram, CheckResult
 
-class BirthplaceTest(StageTest):
+dict_data_CORRECT = {
+    "countries": ['other countries', 'usa', 'germany', 'uk', 'france', 'russia', 'austria', 'canada', 'poland'],
+    "count": [343, 237, 98, 91, 43, 32, 26, 26, 25],
+    "colors": ['blue', 'orange', 'red', 'yellow', 'green', 'pink', 'brown', 'cyan', 'purple'],
+    "autopct": "fsdf",
+    "counterclock": True,
+    "explode": [0, 0, 0, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08],
+}
 
-    def generate(self) -> List[TestCase]:
-        return [TestCase(time_limit=15000)]
 
-    def check(self, reply: str, attach):
+class Pie(PlottingTest):
 
-        reply = reply.strip()
+    @dynamic_test
+    def test(self):
+        pr = TestedProgram()
+        pr.start()
+        all_figures = self.all_figures()
+        if len(all_figures) == 0:
+            raise WrongAnswer("Looks like you didn't present any plots")
+        if len(all_figures) != 1:
+            raise WrongAnswer(f"Expected one pie plot of Nobel laureates countries distribution, "
+                              f"found {len(all_figures)} plots.")
+        graph_type = all_figures[0].type
 
-        if len(reply) == 0:
-            return CheckResult.wrong("No output was printed")
+        if graph_type != "pie":
+            raise WrongAnswer(f"The type of the first plot is wrong.\n"
+                              f"The pie plot is expected, found {graph_type} plot.")
 
-        if reply.count('[') < 1 or reply.count(']') < 1:
-            return CheckResult.wrong('Print the answer as a list')
-
-        index_reply_from = reply.find('[')
-        index_reply_to = reply.find(']')
-        list_country = reply[index_reply_from: index_reply_to + 1]
+        graph_data_countries = all_figures[0].data.x.tolist()
 
         try:
-            user_list = ast.literal_eval(list_country)
-        except Exception as e:
-            return CheckResult.wrong(f"Seems that output is in wrong format.\n"
-                                     f"Make sure you use only the following Python structures in the output: string, "
-                                     f"int, float, list, dictionary")
+            graph_data_countries = [x.lower() for x in graph_data_countries]
+        except:
+            raise WrongAnswer("Didn't find names of the countries in the plot.")
 
-        if not isinstance(user_list, list):
-            return CheckResult.wrong(f'Print your answer as a Python list')
+        graph_data_count = all_figures[0].data.y.tolist()
 
-        if len(user_list) != len(answer):
-            return CheckResult.wrong(f'List from the answer should contain {len(answer)} values, found {len(user_list)}')
+        if "other countries" not in graph_data_countries:
+            raise WrongAnswer("Didn't find \"Other countries\" category in the pie plot.\n"
+                              "Please refer to the objective #1 in the stage description.")
+        if not set(graph_data_countries) == set(dict_data_CORRECT["countries"]):
+            raise WrongAnswer(f"The list of the countries presented in the pie plot is wrong.\n"
+                              f"Expected:\n{dict_data_CORRECT['countries']}\n"
+                              f"Found: \n{graph_data_countries}")
 
-        if set(user_list) != set(answer):
-            for value in answer:
-                if value not in user_list:
-                    return CheckResult.wrong(f"Seems like your answer is not correct: there is no {value} in the output list")
-            if len(set(user_list) - set(answer)) > 0:
-                return CheckResult.wrong(f"Seems like your answer is not correct.\n"
-                                         f"The following values are excessive: {list(set(user_list) - set(answer))}.")
-            return CheckResult.wrong("Seems like your answer is not correct")
+        if not set(graph_data_count) == set(dict_data_CORRECT["count"]):
+            raise WrongAnswer("Distribution of countries displayed in the pie plot is wrong")
+
+        if not all_figures[0].kwargs.get("colors"):
+            raise WrongAnswer("Please define 'colors' parameter!")
+        elif not set(all_figures[0].kwargs.get("colors")) == set(dict_data_CORRECT["colors"]):
+            raise WrongAnswer("The 'colors' in the pie plot are wrong!")
+
+        if not all_figures[0].kwargs.get("autopct"):
+            raise WrongAnswer("The 'autopct' parameter is not defined!")
+        elif not isfunction(all_figures[0].kwargs.get("autopct")):
+            raise WrongAnswer("The 'autopct' parameter is not a function!")
+
+        if not all_figures[0].kwargs.get("explode"):
+            raise WrongAnswer("Please define 'explode' parameter!")
+        elif not set(all_figures[0].kwargs.get("explode")) == set(dict_data_CORRECT["explode"]):
+            raise WrongAnswer("The 'explode' values in the pie plot are wrong!")
 
         return CheckResult.correct()
 
 
 if __name__ == '__main__':
-    BirthplaceTest().run_tests()
+    Pie().run_tests()
