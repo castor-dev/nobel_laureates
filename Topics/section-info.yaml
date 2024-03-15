@@ -5,3 +5,4 @@ content:
   - Sep and end arguments of print
   - DataFrame
   - Accessing data in a DataFrame
+  - Intro to NumPy

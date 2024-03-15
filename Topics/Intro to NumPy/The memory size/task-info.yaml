@@ -1,0 +1,18 @@
+type: code
+files:
+  - name: main.py
+    visible: true
+    highlight_level: NONE
+    text: |-
+      import numpy as np
+      
+      def memory_size(arr):
+          ...
+    learner_created: false
+feedback_link: https://hyperskill.org/learn/step/11117#comment
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Fri, 15 Mar 2024 07:21:46 UTC"
+record: -1
+submission_language: python3

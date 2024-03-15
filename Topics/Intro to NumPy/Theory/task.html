@@ -1,0 +1,97 @@
+<h2>Intro to NumPy</h2>
+<div class="step-text">
+<p><strong>NumPy </strong>(short for <em>Numerical Python</em>) is a Python library fundamental for scientific computing. It supports a variety of high-level mathematical functions and is broadly used in data science, machine learning, and big data applications. With its help, you will be able to perform linear algebra calculations easily, as well as statistical, logical, and other operations, making use of numerous built-in functions.</p>
+<p>Most parts of NumPy that require high execution speed are written in C, which makes the operations much faster than the corresponding ones in Python itself. Owing to its efficiency and convenience, the library has gained vast popularity among data scientists who work with large datasets and need to perform fast computations.</p>
+<h5 id="installation" style="text-align: center;">Installation</h5>
+<p>Firstly, to start working with NumPy, we need to install it, which can be easily done with pip:</p>
+<pre><code class="language-python">pip install numpy</code></pre>
+<p>You can read more about the installation on the <a href="https://www.scipy.org/install.html" rel="noopener noreferrer nofollow" target="_blank">official page</a> of the scientific python distribution.</p>
+<p>Then, import the library before starting your work:</p>
+<pre><code class="language-python">import numpy as np</code></pre>
+<h5 id="numpy-arrays" style="text-align: center;">NumPy arrays</h5>
+<p>The core NumPy object is an n-dimensional <strong>array</strong>,<strong> </strong>also known as <strong>ndarray</strong>. The simplest way to create a NumPy array is to convert a Python list:</p>
+<pre><code class="language-python">first = np.array([1, 2, 3, 4, 5])
+print(first)                       # [1 2 3 4 5]
+print(type(first))                 # &lt;class 'numpy.ndarray'&gt;</code></pre>
+<p>In the example above, <code class="language-python">first</code> is a one-dimensional array that is treated as a <strong>vector</strong>. As you can see, when printed, it is rendered without commas, as opposed to Python lists.</p>
+<p>You can also use not only integers in the list but any objects (strings, lists, etc.) by specifying the <code class="language-python">dtype</code> argument as <code class="language-python">object</code>(Python object, since in this example you have <code class="language-python">int</code>, <code class="language-python">str</code>, and <code class="language-python">list</code>as element types):</p>
+<pre><code class="language-python">first_modified = np.array(['1', 2, [3], 4, [5]], dtype=object)
+print(first_modified)  # ['1' 2 list([3]) 4 list([5])]</code></pre>
+<p>Something to consider here is that if there are multiple fundamental Python types in the array, like in <code class="language-python">first_modified</code>, <code class="language-python">numpy</code> will treat them as the same minimal type required to store all objects in the sequence(the <code class="language-python">object</code>), since <code class="language-python">numpy</code> arrays should be homogenous(that is, all elements have the same type).</p>
+<p>Similarly, we can create a two-dimensional Numpy array from the corresponding Python list. Two- and more dimensional arrays are treated as <strong>matrices</strong>.</p>
+<pre><code class="language-python">second = np.array([[1, 1, 1],
+                   [2, 2, 2]])
+
+print(second)    # [[1 1 1]
+                 #  [2 2 2]]</code></pre>
+<p>If you try to create a two-dimensional Numpy array from a list with sublists of two different lengths, you will obtain a one-dimensional array(in the one-dimensional array, there will be only one value in the shape tuple). This occurs because the elements of an array are stored contiguously in memory.</p>
+<pre><code class="language-python">second_modified = np.array([[1, 2, 3], 
+                            [4, 5]],  dtype=object)
+print(second_modified)  # [list([1, 2, 3]) list([4, 5])]
+print(second_modified.shape)  #(2,)</code></pre>
+<h5 id="numpy-arrays-vs-python-lists" style="text-align: center;">NumPy arrays vs Python lists</h5>
+<p>As you can see, NumPy arrays resemble a Python built-in list data type. However, there are a few crucial differences:</p>
+<ul>
+<li>Unlike Python lists, which can contain objects of different types(a property known as <strong>heterogeneity</strong>), the objects in NumPy arrays with different Python types will be of the <strong>same type</strong> — the<code class="language-python">dtype</code>. This property is referred to as <strong>homogeneity</strong>, where all elements in the array have the same type, and homogeneity is enforced for performance optimization(operations would be inefficient otherwise). It means that you still can have multiple Python datatypes inside a NumPy array, but they all will be of the <code class="language-python">object</code> type we mentioned earlier. By default, the <code class="language-python">dtype</code> will be set to the minimum type required to hold all objects in the sequence.</li>
+<li>NumPy arrays are much more <strong>memory-efficient</strong> and much <strong>faster </strong>than Python lists when working with large datasets due to various optimizations.</li>
+<li><strong>Arithmetic operations</strong> differ when executed on Python lists or NumPy arrays.</li>
+</ul>
+<p>Let's take a look at arithmetic operations that can be applied both to arrays and to lists. All differences in them can be explained by the fact that Numpy arrays are created for computing and treated as vectors and matrices, while Python lists are a datatype made just to store data.</p>
+<p>To illustrate it, we'll create two lists and two arrays containing the same elements:</p>
+<pre><code class="language-python">list_a = [1, 2, 3, 4]
+array_a = np.array(list_a)
+
+list_b = [11, 22, 33, 44]
+array_b = np.array(list_b)</code></pre>
+<p>First, let's find their sum. The addition of two arrays returns their sum as when we add two vectors.</p>
+<pre><code class="language-python">print(array_a + array_b)  # [12 24 36 48]</code></pre>
+<p>For this reason, we can't add up arrays of different lengths, a <code class="language-python">ValueError</code> will appear.</p>
+<pre><code class="language-python">array_c = np.array([111, 222])
+print(array_a + array_c)        # ValueError</code></pre>
+<p>When we try to add a list and an array, the former is converted to an array, so the result is also a sum of vectors.</p>
+<pre><code class="language-python">print(list_a + array_a)   # [2 4 6 8]</code></pre>
+<p>However, when applied to lists, addition just merges them together.</p>
+<pre><code class="language-python">print(list_a + list_b)    # [1, 2, 3, 4, 11, 22, 33, 44]</code></pre>
+<p>Similarly, if we try to multiply a list by <code class="language-python">n</code>, we'll get the list repeated <em>n</em> times, while with an array, each element will be multiplied by <em>n</em>:</p>
+<pre><code class="language-python">print(list_a * 3)   # [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]
+print(array_a * 3)  # [3 6 9 12]</code></pre>
+<h5 id="learning-sizes" style="text-align: center;">Learning sizes</h5>
+<p>There're a number of ways to learn more about an array without printing it.</p>
+<pre><code class="language-python">first = np.array([1, 2, 3, 4, 5])
+second = np.array([[1, 1, 1],
+                   [2, 2, 2]])</code></pre>
+<p>To find out the dimension size, use <code class="language-python">shape</code>. The first number of the output indicates the number of rows and the second — the number of columns if we are talking about 2-dimensional arrays. For a more general case, when we consider a higher number of dimensions, the length of the <code class="language-python">arr.shape</code> tuple will show the number of dimensions, and each element in the tuple will specify the element count for each dimension.</p>
+<pre><code class="language-python">print(second.shape)  # (2, 3)</code></pre>
+<p>In the example above, there are 2 dimensions(<code class="language-python">len(second.shape)==second.ndim</code> is 2), <code class="language-python">second.shape[0]</code> — the first dimension has 2 elements, and <code class="language-python">second.shape[1]</code> tells us that there are 3 elements in the second dimension.</p>
+<p>If the NumPy array has only one dimension, the result will be a bit different:</p>
+<pre><code class="language-python">print(first.shape)   # (5,)</code></pre>
+<p>In this case, the first number is not the number of rows but rather the number of elements in the only dimension, and the empty place after the comma means that there's no second dimension.</p>
+<p>The length of the <code class="language-python">shape</code> tuple is the number of dimensions, <code class="language-python">ndim</code>.</p>
+<pre><code class="language-python">print(first.ndim)   # 1
+print(second.ndim)  # 2</code></pre>
+<p>The function <code class="language-python">len()</code> returns the array's length, and <code class="language-python">size</code> gives us the number of elements in the array.</p>
+<pre><code class="language-python">print(len(first), first.size)    # 5 5 
+print(len(second), second.size)  # 2 6</code></pre>
+<p>Note that in the first case they return the same value, while in the second case the numbers differ. The  thing is, <code class="language-python">len()</code> works as it would work with regular lists, so if we regard the two-dimensional array above as a list containing two nested lists, it becomes clear that for finding its length only the nested lists are counted. Size, on the contrary, counts each single element in all nested lists.</p>
+<p>Another thing to point out is that both the length and the size of an array can also be found from its shape: length is actually the element count in the first dimension, so it equals <code class="language-python">shape[0]</code>(note that here we are talking length like we would see from the <code class="language-python">len()</code> function), and size is the total number of elements, which equals the product of all elements in the shape tuple.</p>
+<div style="text-align: center;">
+<figure class="image" style=""><picture><source media="(max-width: 480px)" srcset="https://ucarecdn.com/c2d43d63-3e1e-4434-a27d-001bee501dbf/-/stretch/off/-/resize/480x/-/format/webp/ 1x,https://ucarecdn.com/c2d43d63-3e1e-4434-a27d-001bee501dbf/-/stretch/off/-/resize/960x/-/format/webp/ 2x,https://ucarecdn.com/c2d43d63-3e1e-4434-a27d-001bee501dbf/-/stretch/off/-/resize/1440x/-/format/webp/ 3x" type="image/webp"/><source media="(max-width: 800px)" srcset="https://ucarecdn.com/c2d43d63-3e1e-4434-a27d-001bee501dbf/-/stretch/off/-/resize/800x/-/format/webp/ 1x,https://ucarecdn.com/c2d43d63-3e1e-4434-a27d-001bee501dbf/-/stretch/off/-/resize/1600x/-/format/webp/ 2x,https://ucarecdn.com/c2d43d63-3e1e-4434-a27d-001bee501dbf/-/stretch/off/-/resize/2400x/-/format/webp/ 3x" type="image/webp"/><source srcset="https://ucarecdn.com/c2d43d63-3e1e-4434-a27d-001bee501dbf/-/stretch/off/-/resize/1100x/-/format/webp/ 1x,https://ucarecdn.com/c2d43d63-3e1e-4434-a27d-001bee501dbf/-/stretch/off/-/resize/2200x/-/format/webp/ 2x,https://ucarecdn.com/c2d43d63-3e1e-4434-a27d-001bee501dbf/-/stretch/off/-/resize/3000x/-/format/webp/ 3x" type="image/webp"/><img alt="A 1D array with axis 0, shape: (4,); 2D array with axis 0, axis 1, shape: (2,3); 3D array with axis 0, axis 1, and axis 2, shape: (4, 3, 2)" height="391" name="elsp_0105.png" src="https://ucarecdn.com/c2d43d63-3e1e-4434-a27d-001bee501dbf/" width="700"/></picture>
+<figcaption>Source: NumPy documentation</figcaption>
+</figure>
+</div>
+<p>This illustration helps to understand the logic behind <em>there are 4 elements in the first dimension (axis 0), 3 elements in the second dimension (axis 1), and 2 elements in the 3rd dimension (axis 2), </em>because it looks like the Cartesian coordinates we are all used to. However, NumPy can deal with many more dimensions (these objects are called <em>tensors</em>, and vectors and matrices are just the case of a one-dimensions and the two-dimension tensors, respectively), but the 3D case is the simplest one for us to comprehend in terms of visualizations.</p>
+<p>You can create and try to run some operations on the 3D array case for the better understanding with the code below:</p>
+<pre><code class="language-python">import numpy as np
+arr = np.zeros((4, 3 ,2), dtype=int)          #3D array with zeros of the specified shape
+rnd_arr = np.random.randint(0, 20, (4, 3 ,2)) #3D array with random integers from 0 to 20</code></pre>
+<h5 id="conclusion" style="text-align: center;">Conclusion</h5>
+<p>In this topic, we've learned the basics of NumPy:</p>
+<ul>
+<li>what is NumPy and what it can be used for,</li>
+<li>how to install and import the library,</li>
+<li>arrays, the basic datatype of Numpy,</li>
+<li>the difference between NumPy arrays and Python lists,</li>
+<li>ways to get information about an array's content.</li>
+</ul>
+<p>Now, let's practice the acquired knowledge so that you'll be able to use it in the future.</p>
+</div>
