@@ -111,5 +111,8 @@ files:
       if __name__ == '__main__':    Pie().run_tests()
     learner_created: false
 feedback_link: https://hyperskill.org/learn/step/23841#comment
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Fri, 29 Mar 2024 04:10:53 UTC"
+record: 4

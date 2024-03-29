@@ -1,21 +1,13 @@
 type: choice
 is_multiple_choice: true
 options:
-  - text: "<pre><code class=\"python\">import numpy as npmat = np.array([[1,2],[3,4],[5,6]]).astype('float')arr\
+  - text: "<pre><code class=\"python\">import numpy as np<br>mat = np.array([[1,2,3,4,5,6]]).astype('float64').ravel()</code></pre>"
+  - text: "<pre><code class=\"python\">import numpy as np<br>mat = np.array([[1,2],[3,4,5,6]]).astype('float').ravel()</code></pre>"
+  - text: "<pre><code class=\"python\">import numpy as np<br>mat = np.array([[1,2],[3,4],[5,6]]).astype(float)<br>arr\
+    \ = np.ravel(mat)</code></pre>"
+  - text: "<pre><code class=\"python\">import numpy as np<br>mat = np.array([[1,2],[3,4],[5,6]]).astype('float')<br>arr\
     \ = mat.ravel()</code></pre>"
-  - text: |-
-      <pre><code class="python">import numpy as np
-      mat = np.array([[1,2],[3,4,5,6]]).astype('float').ravel()</code></pre>
-  - text: |-
-      <pre><code class="python">import numpy as np
-      mat = np.array([1,2,3],[4,5,6]).astype('float').ravel()</code></pre>
-  - text: |-
-      <pre><code class="python">import numpy as np
-      mat = np.array([[1,2],[3,4],[5,6]]).astype(float)
-      arr = np.ravel(mat)</code></pre>
-  - text: |-
-      <pre><code class="python">import numpy as np
-      mat = np.array([[1,2,3,4,5,6]]).astype('float64').ravel()</code></pre>
+  - text: "<pre><code>import numpy as np <br>mat = np.array([1,2,3],[4,5,6]).astype('float').ravel()</code></pre>"
 files:
   - name: main.py
     visible: true
@@ -24,10 +16,7 @@ files:
     
     learner_created: false
 feedback_link: https://hyperskill.org/learn/step/34765#comment
-status: Failed
-feedback:
-  message: Answer choices will be shuffled next time.
-  time: "Fri, 15 Mar 2024 07:24:25 UTC"
+status: Solved
 record: -1
 selected_options:
   - 0

@@ -1,72 +1,76 @@
-from inspect import isfunction
-
 from hstest import PlottingTest, WrongAnswer, dynamic_test, TestedProgram, CheckResult
 
-dict_data_CORRECT = {
-    "countries": ['other countries', 'usa', 'germany', 'uk', 'france', 'russia', 'austria', 'canada', 'poland'],
-    "count": [343, 237, 98, 91, 43, 32, 26, 26, 25],
-    "colors": ['blue', 'orange', 'red', 'yellow', 'green', 'pink', 'brown', 'cyan', 'purple'],
-    "autopct": "fsdf",
-    "counterclock": True,
-    "explode": [0, 0, 0, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08],
+dict_img1_data_CORRECT = {
+    "male_yaxis": [194, 69, 107, 78, 218, 198],
+    "female_yaxis": [4, 1, 15, 14, 4, 13],
+    "label_male": "Males",
+    "label_female": "Females",
+    "color_male": "blue",
+    "color_female": "crimson",
+    "width": 0.4,
 }
 
 
-class Pie(PlottingTest):
+class Bar(PlottingTest):
 
     @dynamic_test
     def test(self):
         pr = TestedProgram()
         pr.start()
+
         all_figures = self.all_figures()
         if len(all_figures) == 0:
             raise WrongAnswer("Looks like you didn't present any plots")
-        if len(all_figures) != 1:
-            raise WrongAnswer(f"Expected one pie plot of Nobel laureates countries distribution, "
-                              f"found {len(all_figures)} plots.")
-        graph_type = all_figures[0].type
+        if len(all_figures) != 2:
+            raise WrongAnswer(f"Expected one image of gender distribution across Nobel prize categories")
+        graph1_type, graph2_type = all_figures[0].type, all_figures[1].type
 
-        if graph_type != "pie":
-            raise WrongAnswer(f"The type of the first plot is wrong.\n"
-                              f"The pie plot is expected, found {graph_type} plot.")
+        if graph1_type != "bar" or graph2_type != "bar":
+            raise WrongAnswer("The type of the graph is wrong. The bar plot is expected.")
 
-        graph_data_countries = all_figures[0].data.x.tolist()
+        graph1_data_x, graph1_data_y = all_figures[0].data.x.tolist(), all_figures[0].data.y.tolist()
+        graph2_data_x, graph2_data_y = all_figures[1].data.x.tolist(), all_figures[1].data.y.tolist()
 
-        try:
-            graph_data_countries = [x.lower() for x in graph_data_countries]
-        except:
-            raise WrongAnswer("Didn't find names of the countries in the plot.")
+        if not set(graph1_data_y) == set(dict_img1_data_CORRECT["male_yaxis"]):
+            raise WrongAnswer(
+                "Wrong y-axis data. The values for male Nobel laureates are wrong!")
 
-        graph_data_count = all_figures[0].data.y.tolist()
+        if not set(graph2_data_y) == set(dict_img1_data_CORRECT["female_yaxis"]):
+            raise WrongAnswer(
+                "Wrong y-axis data. The values for female Nobel laureates are wrong!")
 
-        if "other countries" not in graph_data_countries:
-            raise WrongAnswer("Didn't find \"Other countries\" category in the pie plot.\n"
-                              "Please refer to the objective #1 in the stage description.")
-        if not set(graph_data_countries) == set(dict_data_CORRECT["countries"]):
-            raise WrongAnswer(f"The list of the countries presented in the pie plot is wrong.\n"
-                              f"Expected:\n{dict_data_CORRECT['countries']}\n"
-                              f"Found: \n{graph_data_countries}")
+        if not all_figures[0].kwargs.get("label"):
+            raise WrongAnswer("Please define 'label' parameter for the 'Males'!")
+        elif not all_figures[0].kwargs.get("label") == dict_img1_data_CORRECT["label_male"]:
+            raise WrongAnswer(f"The 'label' for the 'Males' is wrong. Make sure it is used for the first group!")
 
-        if not set(graph_data_count) == set(dict_data_CORRECT["count"]):
-            raise WrongAnswer("Distribution of countries displayed in the pie plot is wrong")
+        if not all_figures[1].kwargs.get("label"):
+            raise WrongAnswer("Please define 'label' parameter for the 'Females'!")
+        elif not all_figures[1].kwargs.get("label") == dict_img1_data_CORRECT["label_female"]:
+            raise WrongAnswer(f"The 'label' for the 'Females' is wrong. Make sure it is used for the second group!")
 
-        if not all_figures[0].kwargs.get("colors"):
-            raise WrongAnswer("Please define 'colors' parameter!")
-        elif not set(all_figures[0].kwargs.get("colors")) == set(dict_data_CORRECT["colors"]):
-            raise WrongAnswer("The 'colors' in the pie plot are wrong!")
+        if not all_figures[0].kwargs.get("color"):
+            raise WrongAnswer("Please define 'color' parameter for the 'Males'!")
+        elif not all_figures[0].kwargs.get("color") == dict_img1_data_CORRECT["color_male"]:
+            raise WrongAnswer(f"The 'color' for the 'Males' should be '{dict_img1_data_CORRECT['color_male']}'!")
 
-        if not all_figures[0].kwargs.get("autopct"):
-            raise WrongAnswer("The 'autopct' parameter is not defined!")
-        elif not isfunction(all_figures[0].kwargs.get("autopct")):
-            raise WrongAnswer("The 'autopct' parameter is not a function!")
+        if not all_figures[1].kwargs.get("color"):
+            raise WrongAnswer("Please define 'color' parameter for the 'Females'!")
+        elif not all_figures[1].kwargs.get("color") == dict_img1_data_CORRECT["color_female"]:
+            raise WrongAnswer(f"The 'color' for the 'Females' should be '{dict_img1_data_CORRECT['color_female']}'!")
 
-        if not all_figures[0].kwargs.get("explode"):
-            raise WrongAnswer("Please define 'explode' parameter!")
-        elif not set(all_figures[0].kwargs.get("explode")) == set(dict_data_CORRECT["explode"]):
-            raise WrongAnswer("The 'explode' values in the pie plot are wrong!")
+        if not all_figures[0].kwargs.get("width"):
+            raise WrongAnswer("Please define 'width' parameter for the 'Males'!")
+        elif not all_figures[0].kwargs.get("width") == dict_img1_data_CORRECT["width"]:
+            raise WrongAnswer(f"The 'width' for the 'Males' should be '{dict_img1_data_CORRECT['width']}'!")
+
+        if not all_figures[1].kwargs.get("width"):
+            raise WrongAnswer("Please define 'width' parameter for the 'Females'!")
+        elif not all_figures[1].kwargs.get("width") == dict_img1_data_CORRECT["width"]:
+            raise WrongAnswer(f"The 'width' for the 'Females' should be '{dict_img1_data_CORRECT['width']}'!")
 
         return CheckResult.correct()
 
 
 if __name__ == '__main__':
-    Pie().run_tests()
+    Bar().run_tests()
