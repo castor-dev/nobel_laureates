@@ -1,3 +1,3 @@
-from test.tests import Bar
+from test.tests import Box
 
-if __name__ == '__main__':    Bar().run_tests()
+if __name__ == '__main__':    Box().run_tests()

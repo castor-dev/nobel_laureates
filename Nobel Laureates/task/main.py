@@ -2,8 +2,33 @@ import pandas as pd
 import os
 import requests
 import sys
+import numpy as np
 from dateutil.parser import parse
 import matplotlib.pyplot as plt
+
+
+def plot_pie_chart():
+    fig, ax = plt.subplots()
+    fig.set_size_inches(12, 12)
+    ax.pie(pie_chart_data['counter'].tolist(),
+           labels=pie_chart_data['born_in'].tolist(),
+           autopct=format_pct,
+           explode=exploded,
+           colors=['blue', 'orange', 'red', 'yellow', 'green', 'pink', 'brown', 'cyan', 'purple'])
+    plt.show()
+
+
+def set_data_pie_chart():
+    global pie_chart_data, exploded, total
+    pie_chart_data = df.groupby('born_in').agg(counter=('born_in', 'count'))
+    pie_chart_data.reset_index(inplace=True)
+    pie_chart_data['born_in'] = pie_chart_data.apply(aggregate_countries, axis=1)
+    pie_chart_data = pie_chart_data.groupby('born_in').agg(counter=('counter', 'sum'))
+    pie_chart_data.sort_values(by='counter', ascending=False, inplace=True)
+    pie_chart_data.reset_index(inplace=True)
+    exploded = [0, 0, 0, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08]
+    total = pie_chart_data['counter'].sum()
+
 
 if __name__ == '__main__':
     if not os.path.exists('../Data'):
@@ -18,7 +43,6 @@ if __name__ == '__main__':
         sys.stderr.write("[INFO] Loaded.\n")
 
 
-    # write your code here
     def find_birth_country(row):
         country = row['place_of_birth']
         if country:
@@ -66,6 +90,7 @@ if __name__ == '__main__':
         else:
             return row['born_in']
 
+
     def format_pct(x):
         return '{:.2f}%\n({:.0f})'.format(x, total * x / 100)
 
@@ -80,21 +105,25 @@ if __name__ == '__main__':
     df['year_born'] = df.apply(extract_birth_year, axis=1)
     df['age_of_winning'] = df.apply(calculate_winning_age, axis=1)
 
-    result = df.groupby('born_in').agg(counter=('born_in', 'count'))
-    result.reset_index(inplace=True)
-    result['born_in'] = result.apply(aggregate_countries, axis=1)
-    result = result.groupby('born_in').agg(counter=('counter', 'sum'))
-    result.sort_values(by='counter', ascending=False, inplace=True)
-    result.reset_index(inplace=True)
-    exploded = [0, 0, 0, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08]
-    total = result['counter'].sum()
+    # set_data_pie_chart()
+    # plot_pie_chart()
 
+    bar_chart_dataframe = df[df.category != '']
+    bar_chart_data = bar_chart_dataframe.groupby(['category', 'gender']).agg(counter=('gender', 'count')).reset_index()
 
-    fig, ax = plt.subplots()
-    fig.set_size_inches(12, 12)
-    ax.pie(result['counter'].tolist(),
-           labels=result['born_in'].tolist(),
-           autopct=format_pct,
-           explode=exploded,
-           colors=['blue', 'orange', 'red', 'yellow', 'green', 'pink', 'brown', 'cyan', 'purple'])
+    categories = bar_chart_data['category'].unique().tolist()
+    male_winners = bar_chart_data[bar_chart_data.gender == 'male']['counter'].tolist()
+    female_winners = bar_chart_data[bar_chart_data.gender == 'female']['counter'].tolist()
+
+    plt.figure(figsize=(10, 10))
+
+    x_axis = np.arange(len(categories))
+    plt.bar(x_axis - 0.2, male_winners, width=0.4, label='Males', color='blue')
+    plt.bar(x_axis + 0.2, female_winners, width=0.4, label='Females', color='crimson')
+
+    plt.xticks(x_axis, categories)
+    plt.xlabel('Category', fontsize=14)
+    plt.ylabel('Nobel Laureates Count', fontsize=14)
+    plt.title("The total count of male and female Nobel Prize winners by categories", fontsize=20)
+    plt.legend(loc='upper right')
     plt.show()
