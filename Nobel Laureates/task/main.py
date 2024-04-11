@@ -30,6 +30,24 @@ def set_data_pie_chart():
     total = pie_chart_data['counter'].sum()
 
 
+def plot_bar_chart():
+    bar_chart_dataframe = df[df.category != '']
+    bar_chart_data = bar_chart_dataframe.groupby(['category', 'gender']).agg(counter=('gender', 'count')).reset_index()
+    categories = bar_chart_data['category'].categories().tolist()
+    male_winners = bar_chart_data[bar_chart_data.gender == 'male']['counter'].tolist()
+    female_winners = bar_chart_data[bar_chart_data.gender == 'female']['counter'].tolist()
+    plt.figure(figsize=(10, 10))
+    x_axis = np.arange(len(categories))
+    plt.bar(x_axis - 0.2, male_winners, width=0.4, label='Males', color='blue')
+    plt.bar(x_axis + 0.2, female_winners, width=0.4, label='Females', color='crimson')
+    plt.xticks(x_axis, categories)
+    plt.xlabel('Category', fontsize=14)
+    plt.ylabel('Nobel Laureates Count', fontsize=14)
+    plt.title("The total count of male and female Nobel Prize winners by categories", fontsize=20)
+    plt.legend(loc='upper right')
+    plt.show()
+
+
 if __name__ == '__main__':
     if not os.path.exists('../Data'):
         os.mkdir('../Data')
@@ -108,22 +126,20 @@ if __name__ == '__main__':
     # set_data_pie_chart()
     # plot_pie_chart()
 
-    bar_chart_dataframe = df[df.category != '']
-    bar_chart_data = bar_chart_dataframe.groupby(['category', 'gender']).agg(counter=('gender', 'count')).reset_index()
-
-    categories = bar_chart_data['category'].unique().tolist()
-    male_winners = bar_chart_data[bar_chart_data.gender == 'male']['counter'].tolist()
-    female_winners = bar_chart_data[bar_chart_data.gender == 'female']['counter'].tolist()
+    # plot_bar_chart()
 
     plt.figure(figsize=(10, 10))
-
-    x_axis = np.arange(len(categories))
-    plt.bar(x_axis - 0.2, male_winners, width=0.4, label='Males', color='blue')
-    plt.bar(x_axis + 0.2, female_winners, width=0.4, label='Females', color='crimson')
-
-    plt.xticks(x_axis, categories)
-    plt.xlabel('Category', fontsize=14)
-    plt.ylabel('Nobel Laureates Count', fontsize=14)
-    plt.title("The total count of male and female Nobel Prize winners by categories", fontsize=20)
-    plt.legend(loc='upper right')
+    boxplot_dataframe = df[df.category != '']
+    boxplot_dataframe = boxplot_dataframe[['category', 'age_of_winning']]
+    categories = boxplot_dataframe['category'].unique()
+    categories.sort()
+    data = [boxplot_dataframe[boxplot_dataframe.category == category]['age_of_winning'] for category in
+            categories]
+    all_categories = pd.concat(data)
+    data.append(all_categories)
+    categories = np.append(categories, "All categories")
+    plt.boxplot(data, labels=categories, showmeans=True)
+    plt.title('Distribution of Ages by Category')
+    plt.ylabel('Age of Obtaining the Nobel Prize', fontsize=14)
+    plt.xticks(fontsize=20)
     plt.show()

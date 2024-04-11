@@ -12,6 +12,7 @@ files:
         initialized_from_dependency: false
         selected: true
         status: Solved
+        is_visible: false
     text: type your solution here
     learner_created: false
 feedback_link: https://hyperskill.org/learn/step/10938#comment
